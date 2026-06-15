@@ -1,0 +1,6 @@
+{
+  "leaddistro": {
+    "type": "http",
+    "url": "https://mcp.leaddistro.ai/mcp"
+  }
+}

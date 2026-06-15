@@ -1,0 +1,20 @@
+# macOS / editor cruft
+.DS_Store
+Thumbs.db
+Desktop.ini
+._*
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# logs
+*.log
+
+# secrets / env (never commit anything below)
+.env
+.env.*
+*.pem
+*.key
+*.p12

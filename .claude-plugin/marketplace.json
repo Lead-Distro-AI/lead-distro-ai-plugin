@@ -1,0 +1,33 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "lead-distro-ai-plugin",
+  "description": "Official Lead Distro AI plugin for Claude. Run your lead distribution and pay-per-call account by chatting: set up campaigns, onboard buyers and suppliers, configure automations, and audit account health.",
+  "owner": {
+    "name": "Lead Distro AI",
+    "email": "support@leaddistro.ai"
+  },
+  "plugins": [
+    {
+      "name": "lead-distro-ai",
+      "source": "./plugins/lead-distro-ai",
+      "description": "Manage Lead Distro AI by chatting. Set up campaigns, edit field mappings, onboard buyers and suppliers, configure automations, and audit account health. Drives the Lead Distro AI MCP server (connect once with an org API key), with guided recipes that wrap the raw tools so non-technical operators can run the platform in plain English.",
+      "category": "productivity",
+      "author": {
+        "name": "Lead Distro AI",
+        "email": "support@leaddistro.ai",
+        "url": "https://www.leaddistro.ai/"
+      },
+      "homepage": "https://www.leaddistro.ai/",
+      "keywords": [
+        "lead-distribution",
+        "lead-generation",
+        "pay-per-call",
+        "campaigns",
+        "buyers",
+        "suppliers",
+        "automations",
+        "mcp"
+      ]
+    }
+  ]
+}
