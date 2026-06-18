@@ -13,28 +13,36 @@ account health in plain English.
 
 ## Connecting (do this once)
 
-The skills call tools exposed by the Lead Distro AI MCP server. The user connects
-their AI client to it with an org-scoped API key:
+Installing this plugin registers the Lead Distro AI MCP server automatically (it
+ships an `.mcp.json`). The **first time** a `mcp__leaddistro__*` tool runs, the
+client opens a browser for the user to **sign in and authorize** (OAuth). No API
+key needed. After that the connection refreshes itself.
 
-1. In Lead Distro AI: **Settings → API Keys → Create key** (admin only). Copy the
-   key once (it is shown only once).
-2. Add the connector. For Claude Code:
+If the `mcp__leaddistro__*` tools are not present:
+
+1. Confirm the plugin installed and the client was restarted so the bundled MCP
+   loaded. The cross-agent install is one line:
    ```bash
-   claude mcp add --transport http leaddistro \
-     https://mcp.leaddistro.ai/mcp \
-     --header "Authorization: Bearer YOUR_KEY"
+   npx plugins add Rafael805/lead-distro-ai-plugin
    ```
-   For Cursor / Windsurf, add to the client's MCP config:
-   ```json
-   { "mcpServers": { "leaddistro": { "url": "https://mcp.leaddistro.ai/mcp",
-     "headers": { "Authorization": "Bearer YOUR_KEY" } } } }
-   ```
-3. Restart / reconnect the client so the `mcp__leaddistro__*` tools load.
+2. Trigger any read tool (e.g. `list_campaigns`) and complete the browser sign in
+   when prompted.
 
-If the `mcp__leaddistro__*` tools are not present, the user has not connected yet —
-walk them through the steps above before doing anything else.
+**API key fallback** (scripts, or a client that cannot sign in through a browser):
+create a key in Lead Distro AI under **Settings → API Keys** (admin only, shown
+once), then register the connector manually:
+```bash
+claude mcp add --transport http leaddistro \
+  https://mcp.leaddistro.ai/mcp \
+  --header "Authorization: Bearer YOUR_KEY"
+```
+For Cursor / Windsurf, add to the client's MCP config:
+```json
+{ "mcpServers": { "leaddistro": { "url": "https://mcp.leaddistro.ai/mcp",
+  "headers": { "Authorization": "Bearer YOUR_KEY" } } } }
+```
 
-Full setup guide: `https://www.leaddistro.ai/docs/ai-assistant-mcp`.
+Full setup guide: `https://www.leaddistro.ai/docs/ai-assistant-plugin`.
 
 ## Which sub-skill
 
@@ -42,8 +50,20 @@ Full setup guide: `https://www.leaddistro.ai/docs/ai-assistant-mcp`.
 |---|---|
 | Stand up a new campaign (type, fields, buyers, filters) | `lead-distro-setup-campaign` |
 | Add and configure a buyer (caps, price, delivery, filters) | `lead-distro-onboard-buyer` |
+| Add a supplier / lead source (cost mode, attach to a campaign) | `lead-distro-onboard-supplier` |
+| Turn on real-time ping-post bidding for a campaign | `lead-distro-ping-post` |
+| Give a buyer a login to the buyer portal | `lead-distro-buyer-portal` |
+| Build an automation (notify, deliver, redistribute, resell) | `lead-distro-automations` |
+| Pull a report: revenue, cost, P&L, lead breakdown | `lead-distro-report` |
 | Check account health / what's missing / what's underperforming | `lead-distro-audit` |
 | A one-off read or single edit | call the MCP tool directly (see below) |
+
+Slash commands (shortcuts to the recipes above): `/connect`, `/setup-campaign`,
+`/onboard-buyer`, `/onboard-supplier`, `/audit`, `/report`.
+
+Shared domain reference (campaign model, lead statuses, routing/distribution,
+terminology) lives in `reference/concepts.md` — read it once when unsure how a
+field or status behaves.
 
 ## MCP tools used
 
@@ -57,16 +77,26 @@ key's permissions (`read`, `campaigns:write`). Money movement is never exposed.
 - `mcp__leaddistro__get_lead_stats` — counts, revenue, cost by date range + filters
 - `mcp__leaddistro__get_lead_breakdown` — leads grouped by a dimension (status, buyer, supplier, state…)
 - `mcp__leaddistro__get_campaign_performance` — P&L + lead stats for a campaign
+- `mcp__leaddistro__get_lead` / `mcp__leaddistro__get_lead_distribution_trail` — one lead + where it went
 - `mcp__leaddistro__get_onboarding_status` — what's set up vs missing
+- `mcp__leaddistro__get_campaign_api_spec` — the inbound API spec to give a supplier
+- `mcp__leaddistro__get_portal_members` — who has buyer-portal access
 
 ### Campaign & field setup (`campaigns:write`)
 - `mcp__leaddistro__create_campaign` / `mcp__leaddistro__update_campaign`
-- `mcp__leaddistro__update_field_mapping` — define the fields leads carry
+- `mcp__leaddistro__update_field_mapping` / `mcp__leaddistro__add_campaign_fields` — define the fields leads carry
 - `mcp__leaddistro__update_inbound_filters` — accept/reject rules before distribution
 - `mcp__leaddistro__create_buyer` / `mcp__leaddistro__update_buyer`
 - `mcp__leaddistro__add_buyer_to_campaign` / `mcp__leaddistro__update_campaign_buyer`
+- `mcp__leaddistro__set_buyer_delivery` / `mcp__leaddistro__set_buyer_ping` — per-buyer delivery + ping config
 - `mcp__leaddistro__create_supplier` / `mcp__leaddistro__update_supplier` / `mcp__leaddistro__add_supplier_to_campaign`
+- `mcp__leaddistro__set_supplier_cost_mode` / `mcp__leaddistro__update_campaign_supplier`
+- `mcp__leaddistro__configure_ping_post` — turn on real-time ping-post bidding
 - `mcp__leaddistro__create_automation`
+- `mcp__leaddistro__enable_buyer_portal` / `mcp__leaddistro__add_portal_member` / `mcp__leaddistro__configure_portal_settings`
+
+### Test (`leads:write`)
+- `mcp__leaddistro__send_test_lead` — push a synthetic lead through a campaign to verify routing
 
 ## Hard rules
 

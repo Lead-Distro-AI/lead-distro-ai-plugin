@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "leaddistro": {
+      "type": "http",
+      "url": "https://mcp.leaddistro.ai/mcp",
+      "note": "Lead Distro AI MCP server. Uses OAuth: on first connection the agent prompts you to sign in and authorize in your browser. Org-scoped, read + campaign setup only. Never moves money (no billing, charge, or payout tools)."
+    }
+  }
+}
