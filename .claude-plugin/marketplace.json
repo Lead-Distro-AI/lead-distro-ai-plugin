@@ -1,0 +1,14 @@
+{
+  "name": "lead-distro-ai-plugin",
+  "owner": {
+    "name": "Lead Distro AI",
+    "email": "support@leaddistro.ai"
+  },
+  "plugins": [
+    {
+      "name": "lead-distro-ai",
+      "source": "./",
+      "description": "Run your Lead Distro AI lead distribution and pay-per-call account by chatting: campaigns, buyers, suppliers, ping-post, automations, reports, audits, and embeddable lead capture forms and funnels."
+    }
+  ]
+}
