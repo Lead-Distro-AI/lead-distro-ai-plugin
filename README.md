@@ -16,7 +16,7 @@ Works with **Claude Code** and **Cursor** today. **OpenAI Codex** support is com
 One command installs into every coding agent you have:
 
 ```bash
-npx plugins add Rafael805/lead-distro-ai-plugin
+npx plugins add Lead-Distro-AI/lead-distro-ai-plugin
 ```
 
 Restart your agent so the bundled connector loads. The installer keeps the plugin's skills up to date.
@@ -50,6 +50,8 @@ Once connected, just ask. The plugin includes guided recipes and slash commands 
 | **lead-distro-automations** | — | Build automations: notify, deliver to a Sheet or webhook, redistribute or resell leads. |
 | **lead-distro-report** | `/report` | Pull revenue, cost, profit, and lead breakdowns over any window. |
 | **lead-distro-audit** | `/audit` | Read-only health check with a prioritized fix list. |
+| **lead-distro-forms** | `/forms` | Build and publish an embeddable lead capture form wired to a campaign. Get a live link plus an embed code for any page or funnel. |
+| **lead-distro-funnels** | `/funnels` | Build a lead generation funnel (quiz, appointment, or VSL page). Falls back to an embeddable form if funnels are not enabled on your account yet. |
 
 ### Example prompts
 
@@ -58,6 +60,7 @@ Once connected, just ask. The plugin includes guided recipes and slash commands 
 - "Turn on ping post for my Solar-CA campaign and let my top three buyers bid."
 - "Audit my account. What is set up, what is missing, and what is underperforming this week?"
 - "Show me revenue and profit by buyer for the last 7 days."
+- "Build me a lead form for my solar campaign that I can embed in my GoHighLevel funnel."
 
 ## How it works and what is safe
 

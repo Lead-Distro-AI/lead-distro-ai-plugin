@@ -23,7 +23,7 @@ If the `mcp__leaddistro__*` tools are not present:
 1. Confirm the plugin installed and the client was restarted so the bundled MCP
    loaded. The cross-agent install is one line:
    ```bash
-   npx plugins add Rafael805/lead-distro-ai-plugin
+   npx plugins add Lead-Distro-AI/lead-distro-ai-plugin
    ```
 2. Trigger any read tool (e.g. `list_campaigns`) and complete the browser sign in
    when prompted.
@@ -56,10 +56,12 @@ Full setup guide: `https://www.leaddistro.ai/docs/ai-assistant-plugin`.
 | Build an automation (notify, deliver, redistribute, resell) | `lead-distro-automations` |
 | Pull a report: revenue, cost, P&L, lead breakdown | `lead-distro-report` |
 | Check account health / what's missing / what's underperforming | `lead-distro-audit` |
+| Build an embeddable lead capture form | `lead-distro-forms` |
+| Build a funnel (quiz, appointment, VSL page) | `lead-distro-funnels` |
 | A one-off read or single edit | call the MCP tool directly (see below) |
 
 Slash commands (shortcuts to the recipes above): `/connect`, `/setup-campaign`,
-`/onboard-buyer`, `/onboard-supplier`, `/audit`, `/report`.
+`/onboard-buyer`, `/onboard-supplier`, `/audit`, `/report`, `/forms`, `/funnels`.
 
 Shared domain reference (campaign model, lead statuses, routing/distribution,
 terminology) lives in `reference/concepts.md` — read it once when unsure how a
@@ -81,6 +83,8 @@ key's permissions (`read`, `campaigns:write`). Money movement is never exposed.
 - `mcp__leaddistro__get_onboarding_status` — what's set up vs missing
 - `mcp__leaddistro__get_campaign_api_spec` — the inbound API spec to give a supplier
 - `mcp__leaddistro__get_portal_members` — who has buyer-portal access
+- `mcp__leaddistro__list_funnel_templates` — form/funnel templates available to build from
+- `mcp__leaddistro__list_funnels` / `mcp__leaddistro__get_funnel` — the org's forms/funnels + one definition
 
 ### Campaign & field setup (`campaigns:write`)
 - `mcp__leaddistro__create_campaign` / `mcp__leaddistro__update_campaign`
@@ -94,6 +98,7 @@ key's permissions (`read`, `campaigns:write`). Money movement is never exposed.
 - `mcp__leaddistro__configure_ping_post` — turn on real-time ping-post bidding
 - `mcp__leaddistro__create_automation`
 - `mcp__leaddistro__enable_buyer_portal` / `mcp__leaddistro__add_portal_member` / `mcp__leaddistro__configure_portal_settings`
+- `mcp__leaddistro__create_funnel` / `mcp__leaddistro__update_funnel` / `mcp__leaddistro__publish_funnel` — build + publish lead capture forms and funnels (Labs)
 
 ### Test (`leads:write`)
 - `mcp__leaddistro__send_test_lead` — push a synthetic lead through a campaign to verify routing

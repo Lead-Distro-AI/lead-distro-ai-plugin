@@ -1,13 +1,13 @@
 {
   "name": "lead-distro-ai",
-  "version": "1.1.0",
-  "description": "Run your Lead Distro AI lead distribution and pay-per-call account by chatting. Set up campaigns, edit field mappings, onboard buyers and suppliers, configure ping-post and the buyer portal, build automations, pull reports, and audit account health. Drives the Lead Distro AI MCP server (connects with one browser sign in), with guided recipes and slash commands that wrap the raw tools so non-technical operators can run the platform in plain English.",
+  "version": "1.2.0",
+  "description": "Run your Lead Distro AI lead distribution and pay-per-call account by chatting. Set up campaigns, edit field mappings, onboard buyers and suppliers, configure ping-post and the buyer portal, build automations, pull reports, audit account health, and build embeddable lead capture forms and funnels. Drives the Lead Distro AI MCP server (connects with one browser sign in), with guided recipes and slash commands that wrap the raw tools so non-technical operators can run the platform in plain English.",
   "author": {
     "name": "Lead Distro AI",
     "email": "support@leaddistro.ai",
     "url": "https://www.leaddistro.ai/"
   },
-  "repository": "https://github.com/Rafael805/lead-distro-ai-plugin",
+  "repository": "https://github.com/Lead-Distro-AI/lead-distro-ai-plugin",
   "homepage": "https://www.leaddistro.ai/docs/ai-assistant-plugin",
   "license": "Apache-2.0",
   "keywords": [
