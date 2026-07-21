@@ -19,7 +19,28 @@ One command installs into every coding agent you have:
 npx plugins add Lead-Distro-AI/lead-distro-ai-plugin
 ```
 
-Restart your agent so the bundled connector loads. The installer keeps the plugin's skills up to date.
+Restart your agent so the bundled connector loads.
+
+## Updating
+
+The plugin does not update itself by default. When a new version ships:
+
+- **If you installed with `npx plugins add`**: run the same command again. It fetches the latest version and replaces the old one:
+
+  ```bash
+  npx plugins add Lead-Distro-AI/lead-distro-ai-plugin
+  ```
+
+- **If you installed through Claude Code's plugin manager** (`/plugin`): refresh the marketplace, then reload:
+
+  ```
+  /plugin marketplace update lead-distro-ai-plugin
+  /reload-plugins
+  ```
+
+  Prefer hands-off updates? Run `/plugin`, open the **Marketplaces** tab, select this marketplace, and turn on **auto-update**. Claude Code will then pick up new versions on its own and prompt you to reload.
+
+Check your installed version any time with `/plugin list` and compare it to the version in this repo's [plugin.json](.claude-plugin/plugin.json).
 
 ## Connect to your account
 
