@@ -45,11 +45,19 @@ audience + language, offer. Then:
   benefit-first headline, and a short subheadline ("Answer a few quick
   questions... takes less than 2 minutes"). Trust badges under the first step's
   answers.
-- **Emoji icons on answer buttons (default).** Prefix every quiz answer button
-  label with one fitting emoji (e.g. "🚗 Car accident", "📅 Less than a year
-  ago", "✅ Yes", "❌ Not yet"). Match the emoji to the meaning and keep the
-  style consistent within a step. Skip only if the user opts out or the
-  vertical makes them feel off (use judgment).
+- **Emoji icons on answer buttons (default).** Every quiz answer option takes
+  both an `emoji` and a matching `icon`, e.g.
+  `{ value: "car", label: "Car accident", emoji: "🚗", icon: "car" }`. The
+  funnel's `theme.optionIconStyle` ("emoji" by default, or "icon" / "none")
+  picks which one visitors see, so filling in both is what lets the operator
+  switch the whole form's look later without rewriting copy.
+  - **Never put an emoji in the `label`.** A label is plain words only
+    ("Car accident", not "🚗 Car accident") or the emoji renders twice.
+  - Pick an emoji that literally depicts the answer, and keep the style
+    consistent within a step. All options on a step get a mark, or none do.
+  - If nothing fits an answer, leave that whole step's options bare rather
+    than reaching for a decorative emoji. Same when the user opts out or the
+    vertical makes emojis feel off (use judgment).
 - **One question per step (default).** Each qualifying question gets its OWN
   step page, one `quiz_step` block per page, with big tappable answers. Never
   stack two qualifying questions on one step. 2 to 4 quiz steps is the sweet
@@ -72,6 +80,53 @@ audience + language, offer. Then:
   next ("We'll call you within 15 minutes").
 - 5th-grade reading level, benefit-first headline, specific button text,
   mobile-first. Spanish audiences get fully Spanish copy (`language: es`).
+
+## Look and feel (our blocks by default, flexibility on request)
+
+Default to Lead Distro AI's own blocks and the best practices above. **Never ask
+the user to choose between "custom code" and "our blocks"**: that is your call,
+and the ladder below settles it. Climb it in order and never skip a rung.
+
+1. **Settings first.** Almost every look is a theme key or a block field:
+   `theme.logoUrl` (upload their file with `upload_funnel_asset`, never invent a
+   URL), `theme.primaryColor` (the button color), `accentColor`,
+   `backgroundColor`, `textColor`, `fontFamily`, `radius`; the progress bar's
+   `progressFillColor`, `progressTrackColor`, `progressThickness`,
+   `progressLabelStyle` ("Step 3 of 6" or "Question 3 of 6") and
+   `progressMarker` (an emoji or uploaded image riding the fill edge, a car
+   driving along the bar); quiz option `emoji` / `icon` / `imageUrl`; the
+   `footer` block's disclaimers, links and copyright. **Button text picks a
+   readable color on its own** (white on a dark fill, near-black on yellow or
+   lime), so use the brand's real button color even when it is light;
+   `theme.buttonTextColor` overrides it if the brand insists.
+2. **Then Custom CSS on top of our blocks** (`definition.customCss`), only for a
+   look no setting offers: a shadow or hover lift on the answer cards, a
+   gradient progress fill, letter-spacing. Target the documented hooks, which
+   are identical on the live page, the builder canvas and the HTML export:
+   `.ld-progress`, `.ld-progress-label`, `.ld-progress-pct`,
+   `.ld-progress-track`, `.ld-progress-fill`, `.ld-progress-marker`, `.ld-logo`,
+   `.ld-back`, `.ld-quiz-opt`, `.ld-cta`, `.ld-headline`, `.ld-field`,
+   `.ld-footer`, and `.ld-n-<blockId>` for any single block. The `create_funnel`
+   tool description carries the current list and is the source of truth. Never
+   use CSS for layout or positioning, never write `body` / `html` rules, never
+   `!important` a block's own class. The operator can see and edit this CSS
+   under Settings > Advanced.
+3. **Last, a `custom_code` block** (`{ type: 'custom_code', html }`) for what
+   blocks and CSS cannot express, with `upload_funnel_asset` for any SVG or JPG
+   it needs. Its scripts run on the published page, not on the builder canvas.
+
+**When the user shows a reference** (a screenshot or another funnel's URL):
+match their **brand** faithfully with rung 1: logo, `primaryColor` set to their
+real button color, `progressFillColor` the same, their label wording, and their
+footer small print, links and copyright word for word. Keep **our step
+structure** (question inline on the first step, one question per step, contact
+last) unless they explicitly ask for the reference's structure, such as a
+button-only first page, a three-column answer grid, or no progress bar. When
+they do ask, build exactly that with rungs 1 and 2 and no pushback: it is their
+funnel.
+
+**After building:** share the draft URL, name the two or three places it
+differs from the reference and why, and ask before `publish_funnel`.
 
 ## Compliance footer (default on every funnel)
 

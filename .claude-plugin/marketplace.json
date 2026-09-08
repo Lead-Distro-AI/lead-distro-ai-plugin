@@ -1,14 +1,31 @@
 {
   "name": "lead-distro-ai-plugin",
   "owner": {
-    "name": "Lead Distro AI",
-    "email": "support@leaddistro.ai"
+    "name": "plugins"
   },
   "plugins": [
     {
       "name": "lead-distro-ai",
       "source": "./",
-      "description": "Run your Lead Distro AI lead distribution and pay-per-call account by chatting: campaigns, buyers, suppliers, ping-post, automations, reports, audits, and embeddable lead capture forms and funnels."
+      "description": "Run your Lead Distro AI lead distribution and pay-per-call account by chatting: campaigns, buyers, suppliers, ping-post, automations, reports, audits, and embeddable lead capture forms and funnels.",
+      "version": "1.3.0",
+      "author": {
+        "name": "Lead Distro AI",
+        "email": "support@leaddistro.ai",
+        "url": "https://www.leaddistro.ai/"
+      },
+      "license": "Apache-2.0",
+      "keywords": [
+        "lead-distribution",
+        "lead-generation",
+        "pay-per-call",
+        "campaigns",
+        "buyers",
+        "suppliers",
+        "ping-post",
+        "automations",
+        "mcp"
+      ]
     }
   ]
 }

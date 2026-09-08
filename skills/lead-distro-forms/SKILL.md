@@ -57,12 +57,20 @@ confirmation copy. Skip questions the user already answered.
   `trust_badges` blocks to a form. The form is just the question steps and the
   contact fields. If the user wants a headline and a full page, that's a funnel:
   use the `lead-distro-funnels` skill instead.
-- **Emoji icons on answer buttons (default).** Prefix every quiz answer button
-  label with one fitting emoji (e.g. "🚗 Car accident", "🏍️ Motorcycle
-  accident", "✅ Yes", "❌ Not yet"). Pick emojis that match the meaning; keep
-  them consistent in style across a step. Skip only if the user asks for no
-  emojis or the vertical is somber enough that they'd feel off (use judgment,
-  e.g. funeral services).
+- **Emoji icons on answer buttons (default).** Every quiz answer option takes
+  both an `emoji` and a matching `icon`, e.g.
+  `{ value: "car", label: "Car accident", emoji: "🚗", icon: "car" }`. The
+  form's `theme.optionIconStyle` ("emoji" by default, or "icon" / "none") picks
+  which one visitors see, so filling in both is what lets the operator switch
+  the whole form's look later without rewriting copy.
+  - **Never put an emoji in the `label`.** A label is plain words only
+    ("Car accident", not "🚗 Car accident") or the emoji renders twice.
+  - Pick an emoji that literally depicts the answer, and keep the style
+    consistent within a step. All options on a step get a mark, or none do.
+  - If nothing fits an answer, leave that whole step's options bare rather
+    than reaching for a decorative emoji. Same when the user asks for no emojis
+    or the vertical is somber enough that they'd feel off (use judgment, e.g.
+    funeral services).
 - **One CTA.** One form, one button, one goal per page.
 - **One question per step for a multi-step form.** If the form qualifies with
   several questions, give each qualifying question its own step (one per page),

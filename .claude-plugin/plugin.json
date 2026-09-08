@@ -1,6 +1,6 @@
 {
   "name": "lead-distro-ai",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Run your Lead Distro AI lead distribution and pay-per-call account by chatting. Set up campaigns, edit field mappings, onboard buyers and suppliers, configure ping-post and the buyer portal, build automations, pull reports, audit account health, and build embeddable lead capture forms and funnels. Drives the Lead Distro AI MCP server (connects with one browser sign in), with guided recipes and slash commands that wrap the raw tools so non-technical operators can run the platform in plain English.",
   "author": {
     "name": "Lead Distro AI",
