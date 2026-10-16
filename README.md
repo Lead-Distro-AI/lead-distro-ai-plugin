@@ -58,7 +58,7 @@ Full setup guide: https://www.leaddistro.ai/docs/ai-assistant-plugin
 
 ## What you can do
 
-Once connected, just ask. The plugin includes guided recipes and slash commands for the most common jobs:
+Once connected, just ask. Each skill below is a short pointer: the full, tested procedure is served by the Lead Distro AI MCP server (`get_skill`), so it always matches the server's current tools. The same skills reach Claude.ai and Claude Desktop through the connector, with no plugin needed. The plugin adds slash commands on top:
 
 | Skill | Slash command | Use it to |
 |---|---|---|
@@ -72,7 +72,15 @@ Once connected, just ask. The plugin includes guided recipes and slash commands 
 | **lead-distro-report** | `/report` | Pull revenue, cost, profit, and lead breakdowns over any window. |
 | **lead-distro-audit** | `/audit` | Read-only health check with a prioritized fix list. |
 | **lead-distro-forms** | `/forms` | Build and publish an embeddable lead capture form wired to a campaign. Get a live link plus an embed code for any page or funnel. |
-| **lead-distro-funnels** | `/funnels` | Build a lead generation funnel (quiz, appointment, or VSL page). Falls back to an embeddable form if funnels are not enabled on your account yet. |
+| **lead-distro-funnels** | `/funnels` | Build a lead generation funnel (quiz, appointment, or VSL page). |
+| **lead-distro-funnel-cro** | — | Find the step where a live funnel loses visitors, and A/B test a fix. |
+| **lead-distro-copy-funnel-from-link** | — | Rebuild a funnel you run elsewhere from its URL. |
+| **lead-distro-ad-spend-cost-per-lead** | — | Count Meta ad spend as lead cost and see which ad campaigns pay. |
+| **lead-distro-diagnose-delivery** | — | Find why a Destination is not getting leads, see exactly what is sent, and resend a lead. |
+| **lead-distro-pay-per-call-setup** | — | Set up a pay-per-call campaign with fixed-price Targets and tracking numbers. |
+| **lead-distro-pay-per-call-bidder** | — | Connect a Target that prices each call live from its own API, or a call router. |
+| **lead-distro-migrate-from-leadprosper** | — | Move campaigns, Destinations and Sources over from LeadProsper. |
+| **lead-distro-import-old-leads** | — | Import a spreadsheet of past leads as records. |
 
 ### Example prompts
 
