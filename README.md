@@ -75,6 +75,10 @@ Once connected, just ask. Each skill below is a short pointer: the full, tested 
 | **lead-distro-funnels** | `/funnels` | Build a lead generation funnel (quiz, appointment, or VSL page). |
 | **lead-distro-funnel-cro** | — | Find the step where a live funnel loses visitors, and A/B test a fix. |
 | **lead-distro-copy-funnel-from-link** | — | Rebuild a funnel you run elsewhere from its URL. |
+| **lead-distro-edit-funnel** | — | Change an existing funnel: copy, questions, images, colors, steps or language. |
+| **lead-distro-connect-funnel** | — | Link a funnel to a campaign and fix fields that arrive blank or get rejected. |
+| **lead-distro-funnel-ad-events** | — | Choose which funnel steps count as conversions for Meta, Google Ads or TikTok. |
+| **lead-distro-funnel-partial-leads** | — | Save visitors who give a phone or email and leave before finishing. |
 | **lead-distro-ad-spend-cost-per-lead** | — | Count Meta ad spend as lead cost and see which ad campaigns pay. |
 | **lead-distro-diagnose-delivery** | — | Find why a Destination is not getting leads, see exactly what is sent, and resend a lead. |
 | **lead-distro-pay-per-call-setup** | — | Set up a pay-per-call campaign with fixed-price Targets and tracking numbers. |
