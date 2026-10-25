@@ -1,45 +1,20 @@
 ---
 name: lead-distro-buyer-portal
-description: Set up the Lead Distro AI Buyer Portal for a buyer — enable the portal, configure its settings, and invite a buyer's team members so they can log in to see their leads. Use when the user wants to "give a buyer a login", "enable the buyer portal", "invite a buyer to the portal", or "let my buyer see their leads" in Lead Distro AI. Requires the Lead Distro AI MCP connected.
+description: "Use when the user wants a Destination to log in and see its own leads: \"give this Destination a login\", \"enable the Partner Portal\", \"invite their team to the portal\", \"let them request returns\". Also covers notes the Destination can see. Requires the Lead Distro AI MCP connected."
 ---
 
-# Set up the Buyer Portal in Lead Distro AI
+# Set up a Partner Portal login
 
-Give a buyer a login so they can see the leads they bought. Confirm before every
-write.
+The steps for this job live on the Lead Distro AI server, so they always match its current tools.
 
-## Preconditions
+1. Call `mcp__leaddistro__get_skill` with `slug: "partner-portal"`.
+2. Follow the procedure it returns, step by step.
+3. If the result has a `permission_note`, tell the user before you start: this connection cannot call some of the tools the job needs.
 
-- `mcp__leaddistro__*` tools loaded (see the `lead-distro-ai` router skill).
-- Key needs `campaigns:write`.
+For any other job, call `mcp__leaddistro__list_skills` and pick the matching skill. Every skill is also listed in Lead Distro AI under Settings > MCP & API > Skills.
 
-## Step 1 — Find the buyer
+## If the Lead Distro AI tools are missing
 
-`mcp__leaddistro__list_buyers` → resolve the buyer id. `mcp__leaddistro__get_portal_members`
-→ see who already has access (don't re-invite someone who's already in).
+Installing this plugin registers the Lead Distro AI MCP server (it ships an `.mcp.json`). The first time a `mcp__leaddistro__*` tool runs, the client opens a browser to sign in and authorize. No API key needed.
 
-## Step 2 — Enable the portal
-
-`mcp__leaddistro__enable_buyer_portal` for that buyer if it isn't on yet.
-
-## Step 3 — Configure settings
-
-`mcp__leaddistro__configure_portal_settings` → set what the buyer sees and can do
-(e.g. which fields are visible, whether they can return/dispute leads). Confirm the
-settings with the user before writing.
-
-## Step 4 — Invite members
-
-`mcp__leaddistro__add_portal_member` for each person on the buyer's team, with their
-email. Recap who was invited and what they'll be able to see.
-
-## Step 5 — Recap
-
-Confirm the portal is on, list the members invited, and note that the buyer logs in
-at the Buyer Portal. 
-
-## Hard rules
-
-- It is the **Buyer Portal**, never the "client portal" in anything the user reads.
-- Don't invite a member the user didn't name. Confirm emails before sending invites.
-- Say "buyers", never "clients".
+If the tools are not present, restart the client so the bundled connector loads (install: `npx plugins add Lead-Distro-AI/lead-distro-ai-plugin`), then call any read tool such as `list_campaigns` and finish the browser sign in. Full guide: https://www.leaddistro.ai/docs/ai-assistant-plugin

@@ -1,55 +1,20 @@
 ---
 name: lead-distro-audit
-description: Read-only health check of a Lead Distro AI account — what's set up vs missing, which campaigns are underperforming, cap fulfillment, and buyer/supplier coverage. Use when the user asks "how's my account", "audit my campaigns", "what's wrong", "what should I fix", or "is anything underperforming" in Lead Distro AI. Read-only; never writes. Requires the Lead Distro AI MCP connected.
+description: "Use when the user wants the whole account checked: \"how is my account?\", \"audit my campaigns\", \"what is wrong?\", \"what should I fix first?\". Read-only, ends with a ranked fix list. One lost lead or one Destination that is down belongs to `diagnose-delivery`. Requires the Lead Distro AI MCP connected."
 ---
 
-# Audit a Lead Distro AI account
+# Account health check
 
-A fast, read-only pass over the account that surfaces gaps and underperformance and
-ends with a short, prioritized fix list. This skill never calls a write tool.
+The steps for this job live on the Lead Distro AI server, so they always match its current tools.
 
-## Preconditions
+1. Call `mcp__leaddistro__get_skill` with `slug: "account-audit"`.
+2. Follow the procedure it returns, step by step.
+3. If the result has a `permission_note`, tell the user before you start: this connection cannot call some of the tools the job needs.
 
-- `mcp__leaddistro__*` tools loaded (see the `lead-distro-ai` router skill).
-- The `read` permission is enough.
+For any other job, call `mcp__leaddistro__list_skills` and pick the matching skill. Every skill is also listed in Lead Distro AI under Settings > MCP & API > Skills.
 
-## Step 1 — Onboarding gaps
+## If the Lead Distro AI tools are missing
 
-`mcp__leaddistro__get_onboarding_status` → list anything not set up (a campaign with
-no buyers, no supplier, no field mapping, etc.). These are the highest-priority fixes
-because they block leads from flowing.
+Installing this plugin registers the Lead Distro AI MCP server (it ships an `.mcp.json`). The first time a `mcp__leaddistro__*` tool runs, the client opens a browser to sign in and authorize. No API key needed.
 
-## Step 2 — Inventory
-
-`mcp__leaddistro__list_campaigns`, `mcp__leaddistro__list_buyers`,
-`mcp__leaddistro__list_suppliers`. Note:
-- Campaigns that are `PAUSED` but otherwise complete (likely should be live).
-- Buyers/suppliers not attached to any campaign (dead weight or forgotten setup).
-
-## Step 3 — Performance
-
-For each active campaign, `mcp__leaddistro__get_campaign_performance` over a sensible
-window (last 7 and 30 days). Flag:
-- Negative or thin margin (cost close to or above revenue).
-- Low acceptance rate (many leads not accepted by buyers).
-- Caps never filling (under-delivery) or always maxing (leaving demand on the table).
-Use `mcp__leaddistro__get_lead_breakdown` to localize a problem (e.g. one buyer
-rejecting most leads, one state with poor acceptance).
-
-## Step 4 — Report
-
-Write a short report, bottom line first:
-- **Fix now** — onboarding gaps and anything blocking leads.
-- **Worth attention** — margin/acceptance/cap issues, ranked by dollar impact.
-- **Looks healthy** — a one-line confirmation of what's working.
-
-For each finding, name the campaign/buyer and the specific number behind it (don't
-just say "low acceptance" — say "acceptance 38% on Solar-CA, vs 71% account-wide").
-Keep the language plain. Offer to fix the top items via the
-`lead-distro-setup-campaign` or `lead-distro-onboard-buyer` skills (which do write).
-
-## Hard rules
-
-- Read-only. If a fix is needed, recommend it and hand off; do not write here.
-- Every claim cites a number you actually pulled from a tool. No guessing.
-- Say "buyers", never "clients".
+If the tools are not present, restart the client so the bundled connector loads (install: `npx plugins add Lead-Distro-AI/lead-distro-ai-plugin`), then call any read tool such as `list_campaigns` and finish the browser sign in. Full guide: https://www.leaddistro.ai/docs/ai-assistant-plugin

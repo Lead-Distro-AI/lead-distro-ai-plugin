@@ -1,51 +1,20 @@
 ---
 name: lead-distro-report
-description: Pull a performance report from Lead Distro AI — revenue, cost, profit/margin, lead counts and acceptance, broken down by campaign, buyer, supplier, state, or status over a date range. Use when the user asks "show me revenue", "how did last week go", "what's my profit on X campaign", "break leads down by buyer", or wants any numbers report. Read-only; never writes. Requires the Lead Distro AI MCP connected.
+description: "Use when the user wants numbers: \"how did last week go?\", \"what is my profit on this campaign?\", \"break leads down by Destination\". Read-only. Call numbers use get_call_stats; account health checks belong to `account-audit`. Requires the Lead Distro AI MCP connected."
 ---
 
-# Pull a Lead Distro AI report
+# Revenue, cost and profit reports
 
-A read-only reporting pass that answers a money or volume question with real
-numbers. This skill never calls a write tool.
+The steps for this job live on the Lead Distro AI server, so they always match its current tools.
 
-## Preconditions
+1. Call `mcp__leaddistro__get_skill` with `slug: "report"`.
+2. Follow the procedure it returns, step by step.
+3. If the result has a `permission_note`, tell the user before you start: this connection cannot call some of the tools the job needs.
 
-- `mcp__leaddistro__*` tools loaded (see the `lead-distro-ai` router skill).
-- The `read` permission is enough.
+For any other job, call `mcp__leaddistro__list_skills` and pick the matching skill. Every skill is also listed in Lead Distro AI under Settings > MCP & API > Skills.
 
-## Step 1 — Pin the question
+## If the Lead Distro AI tools are missing
 
-Settle three things (ask only what you can't infer):
-- **Window** — e.g. last 7 days, last 30, this month, a specific range.
-- **Scope** — the whole account, one campaign, one buyer, or one supplier.
-- **Cut** — the dimension to break down by (campaign, buyer, supplier, state,
-  status), if any.
+Installing this plugin registers the Lead Distro AI MCP server (it ships an `.mcp.json`). The first time a `mcp__leaddistro__*` tool runs, the client opens a browser to sign in and authorize. No API key needed.
 
-## Step 2 — Pull the numbers
-
-- Account or filtered totals: `mcp__leaddistro__get_lead_stats` (counts, revenue,
-  cost over the window + filters).
-- One campaign's P&L: `mcp__leaddistro__get_campaign_performance`.
-- A breakdown by a dimension: `mcp__leaddistro__get_lead_breakdown` (group by
-  status, buyer, supplier, state…).
-- Resolve any names → ids first with `list_campaigns` / `list_buyers` /
-  `list_suppliers`.
-
-## Step 3 — Present it
-
-Bottom line first, then the table:
-- Lead with the headline number the user asked for (e.g. "Last 7 days: $4,210
-  revenue, $2,980 cost, $1,230 profit, 44% margin").
-- Then the breakdown as a compact table, sorted by the metric that matters
-  (usually profit or volume).
-- Count a **Returned** (`DISPUTED`) lead as revenue lost but cost kept — call it
-  out if it materially dents margin.
-- Keep the language plain; spell out any rate ("acceptance 62%" not just "62").
-
-## Hard rules
-
-- Read-only. Every number comes from a tool call — never estimate.
-- Say "buyers" / "suppliers", never "clients" / "vendors-as-buyers".
-- If the user then wants to act on a finding, hand off to `lead-distro-audit`
-  (diagnose) or the relevant write skill.
-- See `reference/concepts.md` for status meanings (especially Returned).
+If the tools are not present, restart the client so the bundled connector loads (install: `npx plugins add Lead-Distro-AI/lead-distro-ai-plugin`), then call any read tool such as `list_campaigns` and finish the browser sign in. Full guide: https://www.leaddistro.ai/docs/ai-assistant-plugin
