@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Pull a Lead Distro AI report (revenue, cost, profit, lead breakdown) over a date range.
 argument-hint: [what + window, e.g. "revenue by buyer, last 7 days"]
 ---

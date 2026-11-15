@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Stand up a new Lead Distro AI campaign end to end (type, routing, fields, first buyer and supplier).
 argument-hint: [what the campaign is for, e.g. "auto accident leads in CA"]
 ---
