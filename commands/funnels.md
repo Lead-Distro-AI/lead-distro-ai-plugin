@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Build a lead generation funnel (quiz, appointment, or VSL) in Lead Distro AI, or an embeddable form if funnels are not enabled yet.
 argument-hint: [what the funnel is for, e.g. "auto accident quiz funnel in CA"]
 ---

@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Add a supplier / lead source in Lead Distro AI (cost mode, attach to a campaign, share the API spec).
 argument-hint: [supplier + cost, e.g. "LeadGenCo at $12/lead on Solar-CA"]
 ---

@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Run a read-only health check of the Lead Distro AI account and return a prioritized fix list.
 ---
 

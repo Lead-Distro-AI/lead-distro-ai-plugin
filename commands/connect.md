@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Connect this Lead Distro AI account (or check the connection) and explain what you can do.
 ---
 

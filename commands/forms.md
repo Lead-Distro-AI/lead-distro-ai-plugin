@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 description: Build and publish an embeddable lead capture form wired to a Lead Distro AI campaign.
 argument-hint: [what the form is for, e.g. "solar leads in Texas, Spanish"]
 ---
